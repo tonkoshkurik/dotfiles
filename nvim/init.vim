@@ -72,9 +72,9 @@ Plug 'tpope/vim-dispatch'
 Plug 'mileszs/ack.vim'
 "
 "Autocomplete
-" Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 " Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
-" Plug 'neoclide/coc-denite'
+Plug 'neoclide/coc-denite'
 call plug#end()
 " !!! ONLY when deoplete enabled
 let g:deoplete#enable_at_startup = 1
@@ -83,7 +83,7 @@ Plug 'phpactor/phpactor' ,  {'do': 'composer install', 'for': 'php'}
 Plug 'kristijanhusak/deoplete-phpactor'
 
 " !!! ONLY WHEN USING COC.VIM !!!
-"source ~/.dotfiles/nvim/coc.nvim
+source ~/.dotfiles/nvim/coc.nvim
 
 " !!!! only set this shit when ncm2 enabled !!!!!!
 " autocmd BufEnter * call ncm2#enable_for_buffer()
@@ -98,7 +98,7 @@ Plug 'kristijanhusak/deoplete-phpactor'
 " --------------------------------------------------
 "
 " set macligatures
-set guifont=Fira\ Code:h16
+set guifont=Fira\ Code:h14
 
 set linespace=3
 
