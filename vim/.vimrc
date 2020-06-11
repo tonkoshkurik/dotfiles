@@ -24,9 +24,9 @@
 	Plug 'tpope/vim-fugitive'
 	Plug 'airblade/vim-gitgutter'
 
-	" Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
-	" Plug 'neoclide/coc.nvim', {'branch': 'release'}	
-    " source ~/.vim/cocplugin.vim
+	Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+	Plug 'neoclide/coc.nvim', {'branch': 'release'}	
+    source ~/.vim/cocplugin.vim
 
 	" CS
 	Plug 'tpope/vim-surround'
@@ -46,7 +46,7 @@
         Plug 'roxma/nvim-yarp'
         Plug 'roxma/vim-hug-neovim-rpc'
     endif
-    let g:deoplete#enable_at_startup = 1
+    " let g:deoplete#enable_at_startup = 1
     " call deoplete#enable()
 
 	Plug 'ncm2/ncm2-cssomni'
@@ -67,11 +67,12 @@ Plug 'afternoon/vim-phpunit'
 Plug 'tpope/vim-dispatch'
 Plug 'mileszs/ack.vim'
 Plug 'altercation/vim-colors-solarized'
+Plug 'junegunn/seoul256.vim'
 call plug#end()
 
 " --------------------------------------------------
 "
-set macligatures
+" set macligatures
 set guifont=Fira\ Code:h16
 set linespace=3
 
@@ -89,9 +90,9 @@ set expandtab       " Expand TABs to spaces
 
 
 " Unified color scheme (default: dark)
-" colo seoul256
-set background=light
-colo solarized
+colo seoul256
+" set background=light
+" colo solarized
 
 
 " Light color scheme

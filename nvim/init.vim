@@ -40,14 +40,14 @@ Plug 'tpope/vim-vinegar'
 " Snippets
 " Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 if has('nvim')
-	Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+	" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 	" Plug 'ncm2/ncm2'
 	" enable ncm2 for all buffers
 	" Plug 'ncm2/ncm2-bufword'
 	" Plug 'ncm2/ncm2-path'
 else
 	" Plug 'ncm2/ncm2'
-	Plug 'Shougo/deoplete.nvim'
+	" Plug 'Shougo/deoplete.nvim'
 	Plug 'roxma/nvim-yarp'
 	Plug 'roxma/vim-hug-neovim-rpc'
 endif
@@ -58,6 +58,9 @@ endif
 " Plug 'ncm2/ncm2-jedi'
 " Plug 'phpactor/phpactor' ,  {'do': 'composer install', 'for': 'php'}
 " Plug 'phpactor/ncm2-phpactor'
+Plug 'afternoon/vim-phpunit'
+Plug 'jwalton512/vim-blade'
+
 " Dark powered shell interface for NeoVim and Vim8.
 Plug 'Shougo/deol.nvim'
 
@@ -66,7 +69,6 @@ Plug 'Shougo/denite.nvim'
 
 Plug 'pangloss/vim-javascript'
 Plug 'mattn/emmet-vim'
-Plug 'afternoon/vim-phpunit'
 Plug 'tpope/vim-dispatch'
 
 Plug 'mileszs/ack.vim'
@@ -75,12 +77,14 @@ Plug 'mileszs/ack.vim'
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 " Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
 Plug 'neoclide/coc-denite'
+Plug 'phpactor/phpactor' ,  {'do': 'composer install', 'for': 'php'}
+" Plug 'kristijanhusak/deoplete-phpactor'
+"
+Plug 'jeffkreeftmeijer/vim-numbertoggle'
 call plug#end()
 " !!! ONLY when deoplete enabled
-let g:deoplete#enable_at_startup = 1
+" let g:deoplete#enable_at_startup = 1
 
-Plug 'phpactor/phpactor' ,  {'do': 'composer install', 'for': 'php'}
-Plug 'kristijanhusak/deoplete-phpactor'
 
 " !!! ONLY WHEN USING COC.VIM !!!
 source ~/.dotfiles/nvim/coc.nvim
@@ -117,10 +121,10 @@ set expandtab       " Expand TABs to spaces
 
 
 " Unified color scheme (default: dark)
-colo seoul256
+" colo seoul256
 
 " Light color scheme
-" colo seoul256-light
+colo seoul256-light
 " Auto reload changed files
 set autoread
 
@@ -291,3 +295,14 @@ let g:ctrlp_custom_ignore = {
   \ 'link': 'some_bad_symbolic_links',
   \ }
 
+
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+
+" :CocInstall coc-prettier 
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+vmap <leader>p  <Plug>(coc-format-selected)
+nmap <leader>p  <Plug>(coc-format-selected)
+
+set statusline=%{FugitiveStatusline()}
