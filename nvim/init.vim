@@ -40,14 +40,14 @@ Plug 'tpope/vim-vinegar'
 " Snippets
 " Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 if has('nvim')
-	Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+	" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 	" Plug 'ncm2/ncm2'
 	" enable ncm2 for all buffers
 	" Plug 'ncm2/ncm2-bufword'
 	" Plug 'ncm2/ncm2-path'
 else
 	" Plug 'ncm2/ncm2'
-	Plug 'Shougo/deoplete.nvim'
+	" Plug 'Shougo/deoplete.nvim'
 	Plug 'roxma/nvim-yarp'
 	Plug 'roxma/vim-hug-neovim-rpc'
 endif
@@ -63,10 +63,13 @@ Plug 'Shougo/deol.nvim'
 
 " Denite is a dark powered plugin for Neovim/Vim to unite all interfaces
 Plug 'Shougo/denite.nvim'
+" Status line
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
-Plug 'pangloss/vim-javascript'
+" Plug 'pangloss/vim-javascript'
 Plug 'mattn/emmet-vim'
-Plug 'afternoon/vim-phpunit'
+" Plug 'afternoon/vim-phpunit'
 Plug 'tpope/vim-dispatch'
 
 Plug 'mileszs/ack.vim'
@@ -74,16 +77,16 @@ Plug 'mileszs/ack.vim'
 "Autocomplete
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 " Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
-Plug 'neoclide/coc-denite'
+" Plug 'neoclide/coc-denite'
 call plug#end()
 " !!! ONLY when deoplete enabled
-let g:deoplete#enable_at_startup = 1
+" let g:deoplete#enable_at_startup = 1
 
 Plug 'phpactor/phpactor' ,  {'do': 'composer install', 'for': 'php'}
-Plug 'kristijanhusak/deoplete-phpactor'
+" Plug 'kristijanhusak/deoplete-phpactor'
 
 " !!! ONLY WHEN USING COC.VIM !!!
-source ~/.dotfiles/nvim/coc.nvim
+source ~/.dotfiles/nvim/coc.nvim 
 
 " !!!! only set this shit when ncm2 enabled !!!!!!
 " autocmd BufEnter * call ncm2#enable_for_buffer()
@@ -117,10 +120,10 @@ set expandtab       " Expand TABs to spaces
 
 
 " Unified color scheme (default: dark)
-colo seoul256
+" colo seoul256
 
 " Light color scheme
-" colo seoul256-light
+colo seoul256-light
 " Auto reload changed files
 set autoread
 
@@ -290,4 +293,18 @@ let g:ctrlp_custom_ignore = {
   \ 'file': '\v\.(exe|so|dll|pdf)$',
   \ 'link': 'some_bad_symbolic_links',
   \ }
+"statusline 
+let g:airline#extensions#whitespace#mixed_indent_algo = 0
+" let g:airline#extensions#tabline#enabled = 1
+" let g:airline_powerline_fonts = 1
+" let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long', 'mixed-indent-file' ]
+let g:airline#extensions#whitespace#checks = []
 
+function! s:DiffWithSaved()
+  let filetype=&ft
+  diffthis
+  vnew | r # | normal! 1Gdd
+  diffthis
+  exe "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
+endfunction
+com! DiffSaved call s:DiffWithSaved()

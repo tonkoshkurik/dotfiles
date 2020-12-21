@@ -1,62 +1,62 @@
-	if empty(glob('~/.vim/autoload/plug.vim'))
-	  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-	    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-	  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-	endif
+    if empty(glob('~/.vim/autoload/plug.vim'))
+      silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+      autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+    endif
 
 
-	call plug#begin('~/.vim/bundle')
-	" Service plugins first
-	Plug 'junegunn/seoul256.vim'
-	Plug 'tpope/vim-sensible'
-	Plug 'tpope/vim-repeat'
-	Plug 'tomtom/tcomment_vim'
-	Plug 'tpope/vim-unimpaired'
+    call plug#begin('~/.vim/bundle')
+    " Service plugins first
+    Plug 'junegunn/seoul256.vim'
+    Plug 'tpope/vim-sensible'
+    Plug 'tpope/vim-repeat'
+    Plug 'tomtom/tcomment_vim'
+    Plug 'tpope/vim-unimpaired'
 
-	" Highlights the matching HTML tag when the cursor
-	" is positioned on a tag.
-	Plug 'gregsexton/MatchTag'
+    " Highlights the matching HTML tag when the cursor
+    " is positioned on a tag.
+    Plug 'gregsexton/MatchTag'
 
-	" Automatically add closing tags in html-like formats
-	Plug 'alvan/vim-closetag'
+    " Automatically add closing tags in html-like formats
+    Plug 'alvan/vim-closetag'
 
-	" GIT
-	Plug 'tpope/vim-fugitive'
-	Plug 'airblade/vim-gitgutter'
+    " GIT
+    Plug 'tpope/vim-fugitive'
+    Plug 'airblade/vim-gitgutter'
 
-	" Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
-	" Plug 'neoclide/coc.nvim', {'branch': 'release'}	
-    " source ~/.vim/cocplugin.vim
+    Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+    Plug 'neoclide/coc.nvim', {'branch': 'release'} 
+    source ~/.vim/cocplugin.vim
 
-	" CS
-	Plug 'tpope/vim-surround'
+    " CS
+    Plug 'tpope/vim-surround'
 
 
-	" File
-	Plug 'ctrlpvim/ctrlp.vim'
-	Plug 'scrooloose/nerdtree', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] }
-	Plug 'tpope/vim-vinegar'
+    " File
+    Plug 'ctrlpvim/ctrlp.vim'
+    Plug 'scrooloose/nerdtree', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] }
+    Plug 'tpope/vim-vinegar'
 
-	" Snippets
-	" Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+    " Snippets
+    " Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
     if has('nvim')
         Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
     else
-        Plug 'Shougo/deoplete.nvim'
-        Plug 'roxma/nvim-yarp'
-        Plug 'roxma/vim-hug-neovim-rpc'
+        " Plug 'Shougo/deoplete.nvim'
+        " Plug 'roxma/nvim-yarp'
+        " Plug 'roxma/vim-hug-neovim-rpc'
     endif
     let g:deoplete#enable_at_startup = 1
     " call deoplete#enable()
 
-	Plug 'ncm2/ncm2-cssomni'
-	Plug 'ncm2/ncm2-tern'
-	Plug 'ncm2/ncm2-jedi'
-	Plug 'phpactor/phpactor' ,  {'do': 'composer install', 'for': 'php'}
+    Plug 'ncm2/ncm2-cssomni'
+    Plug 'ncm2/ncm2-tern'
+    Plug 'ncm2/ncm2-jedi'
+    Plug 'phpactor/phpactor' ,  {'do': 'composer install', 'for': 'php'}
     Plug 'kristijanhusak/deoplete-phpactor'
-	Plug 'phpactor/ncm2-phpactor'
-	" Dark powered shell interface for NeoVim and Vim8.
-	"
+    Plug 'phpactor/ncm2-phpactor'
+    " Dark powered shell interface for NeoVim and Vim8.
+    "
 " generate doc
 Plug 'kkoomen/vim-doge'
 
@@ -67,12 +67,14 @@ Plug 'afternoon/vim-phpunit'
 Plug 'tpope/vim-dispatch'
 Plug 'mileszs/ack.vim'
 Plug 'altercation/vim-colors-solarized'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 call plug#end()
 
 " --------------------------------------------------
 "
 set macligatures
-set guifont=Fira\ Code:h16
+set guifont=Fira\ Code:h14
 set linespace=3
 
 
@@ -89,9 +91,9 @@ set expandtab       " Expand TABs to spaces
 
 
 " Unified color scheme (default: dark)
-" colo seoul256
+colo seoul256
 set background=light
-colo solarized
+" colo solarized
 
 
 " Light color scheme
@@ -244,3 +246,4 @@ let g:ctrlp_custom_ignore = {
             \ 'file': '\v\.(exe|so|dll|pdf)$',
             \ 'link': 'some_bad_symbolic_links',
             \ }
+set rtp+=/usr/local/opt/fzf
