@@ -13,7 +13,21 @@ let g:python3_host_prog = '/Users/tonkoshkurik/.pyenv/shims/python3'
 
 call plug#begin('~/.vim/bundle')
 " Service plugins first
-Plug 'junegunn/seoul256.vim'
+" neovim lua lsp for code autocomplete
+Plug 'prabirshrestha/vim-lsp'
+Plug 'neovim/nvim-lspconfig'
+Plug 'mattn/vim-lsp-settings'
+Plug 'nvim-lua/completion-nvim'
+" drivers
+Plug 'nvim-lua/completion-nvim'
+Plug 'tjdevries/nlua.nvim'
+""
+" telescope requirements...
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug '/home/theprimeagen/personal/telescope.nvim'
+Plug 'nvim-telescope/telescope-fzy-native.nvim'
+""
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-repeat'
 Plug 'tomtom/tcomment_vim'
@@ -39,7 +53,16 @@ Plug 'tpope/vim-surround'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdtree', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] }
 Plug 'tpope/vim-vinegar'
+Plug 'mileszs/ack.vim'
 
+"Autocomplete
+" Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+" Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'neoclide/coc-denite'
+" Plug 'phpactor/phpactor' ,  {'do': 'composer install', 'for': 'php'}
+" Plug 'kristijanhusak/deoplete-phpactor'
+"
 " Snippets
 " Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 " if has('nvim')
@@ -59,13 +82,13 @@ Plug 'tpope/vim-vinegar'
 " Plug 'ncm2/ncm2-cssomni'
 " Plug 'ncm2/ncm2-tern'
 " Plug 'ncm2/ncm2-jedi'
-Plug 'phpactor/phpactor' ,  {'do': 'composer install', 'for': 'php'}
-Plug 'phpactor/ncm2-phpactor'
+" Plug 'phpactor/php ,  {'do': 'composer install', 'for': 'php'}
+" Plug 'phpactor/ncm2-phpactor'
 Plug 'afternoon/vim-phpunit'
 Plug 'jwalton512/vim-blade'
 
 " Dark powered shell interface for NeoVim and Vim8.
-Plug 'Shougo/deol.nvim'
+" Plug 'Shougo/deol.nvim'
 
 " Denite is a dark powered plugin for Neovim/Vim to unite all interfaces
 " Plug 'Shougo/denite.nvim'
@@ -76,26 +99,26 @@ Plug 'pangloss/vim-javascript'
 Plug 'mattn/emmet-vim'
 Plug 'tpope/vim-dispatch'
 
-Plug 'mileszs/ack.vim'
-"
-"Autocomplete
-" Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
-" Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" Plug 'neoclide/coc-denite'
-Plug 'phpactor/phpactor' ,  {'do': 'composer install', 'for': 'php'}
-" Plug 'kristijanhusak/deoplete-phpactor'
 "
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 " nvim inside the browser !!! WTF? 🌫
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 Plug 'morhetz/gruvbox'
-Plug 'nvim-telescope/telescope.nvim'
-Plug 'neovim/nvim-lspconfig'
+
+" prettier
+Plug 'sbdchd/neoformat'
 call plug#end()
 " !!! ONLY when deoplete enabled
 " let g:deoplete#enable_at_startup = 1
+ 
+let g:gruvbox_contrast_dark = 'hard'
+if exists('+termguicolors')
+	let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+	let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+endif
+let g:gruvbox_invert_selection='0'
 
+set background=dark
 
 " Airline features
 " let g:airline#extensions#tabline#enabled = 1
@@ -122,7 +145,7 @@ let g:UltiSnipsExpandTrigger="<leader>+<tab>"
 " --------------------------------------------------
 "
 " set macligatures
-set guifont=Fira\ Code:h14
+set guifont=Fira\ Code:h16
 
 set linespace=3
 
@@ -332,5 +355,3 @@ endif
 "
 "
 " Seoul airline
-
-
