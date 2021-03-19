@@ -3,6 +3,9 @@ if empty(glob('~/.vim/autoload/plug.vim'))
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
+filetype plugin indent on
+syntax on
+set hidden
 
 let g:python_host_prog='/Users/tonkoshkurik/.pyenv/shims/python'
 let g:python3_host_prog = '/Users/tonkoshkurik/.pyenv/shims/python3'
@@ -39,25 +42,25 @@ Plug 'tpope/vim-vinegar'
 
 " Snippets
 " Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-if has('nvim')
-	" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-	" Plug 'ncm2/ncm2'
-	" enable ncm2 for all buffers
-	" Plug 'ncm2/ncm2-bufword'
-	" Plug 'ncm2/ncm2-path'
-else
-	" Plug 'ncm2/ncm2'
-	" Plug 'Shougo/deoplete.nvim'
-	Plug 'roxma/nvim-yarp'
-	Plug 'roxma/vim-hug-neovim-rpc'
-endif
+" if has('nvim')
+" 	Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" 	Plug 'ncm2/ncm2'
+" 	" enable ncm2 for all buffers
+" 	Plug 'ncm2/ncm2-bufword'
+" 	Plug 'ncm2/ncm2-path'
+" else
+" 	" Plug 'ncm2/ncm2'
+" 	" Plug 'Shougo/deoplete.nvim'
+" 	Plug 'roxma/nvim-yarp'
+" 	Plug 'roxma/vim-hug-neovim-rpc'
+" endif
 
 
 " Plug 'ncm2/ncm2-cssomni'
 " Plug 'ncm2/ncm2-tern'
 " Plug 'ncm2/ncm2-jedi'
-" Plug 'phpactor/phpactor' ,  {'do': 'composer install', 'for': 'php'}
-" Plug 'phpactor/ncm2-phpactor'
+Plug 'phpactor/phpactor' ,  {'do': 'composer install', 'for': 'php'}
+Plug 'phpactor/ncm2-phpactor'
 Plug 'afternoon/vim-phpunit'
 Plug 'jwalton512/vim-blade'
 
@@ -65,7 +68,9 @@ Plug 'jwalton512/vim-blade'
 Plug 'Shougo/deol.nvim'
 
 " Denite is a dark powered plugin for Neovim/Vim to unite all interfaces
-Plug 'Shougo/denite.nvim'
+" Plug 'Shougo/denite.nvim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 Plug 'pangloss/vim-javascript'
 Plug 'mattn/emmet-vim'
@@ -74,20 +79,35 @@ Plug 'tpope/vim-dispatch'
 Plug 'mileszs/ack.vim'
 "
 "Autocomplete
-Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+" Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 " Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
-Plug 'neoclide/coc-denite'
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'neoclide/coc-denite'
 Plug 'phpactor/phpactor' ,  {'do': 'composer install', 'for': 'php'}
 " Plug 'kristijanhusak/deoplete-phpactor'
 "
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
+" nvim inside the browser !!! WTF? 🌫
+Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
+Plug 'morhetz/gruvbox'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'neovim/nvim-lspconfig'
 call plug#end()
 " !!! ONLY when deoplete enabled
 " let g:deoplete#enable_at_startup = 1
 
 
+" Airline features
+" let g:airline#extensions#tabline#enabled = 1
+
+let g:airline_powerline_fonts = 1
+
+
 " !!! ONLY WHEN USING COC.VIM !!!
-source ~/.dotfiles/nvim/coc.nvim
+" source ~/.dotfiles/nvim/coc.nvim
+" source ~/.dotfiles/nvim/seoul256.vim
+let g:UltiSnipsExpandTrigger="<leader>+<tab>"
+" noremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " !!!! only set this shit when ncm2 enabled !!!!!!
 " autocmd BufEnter * call ncm2#enable_for_buffer()
@@ -107,14 +127,14 @@ set guifont=Fira\ Code:h14
 set linespace=3
 
 
-set tabstop=4       " The width of a TAB is set to 4.
+set tabstop=2       " The width of a TAB is set to 4.
                     " Still it is a \t. It is just that
                     " Vim will interpret it to be having
                     " a width of 4.
 
-set shiftwidth=4    " Indents will have a width of 4
+set shiftwidth=2    " Indents will have a width of 4
 
-set softtabstop=4   " Sets the number of columns for a TAB
+set softtabstop=2   " Sets the number of columns for a TAB
 
 set expandtab       " Expand TABs to spaces
 
@@ -124,7 +144,9 @@ set expandtab       " Expand TABs to spaces
 " colo seoul256
 
 " Light color scheme
-colo seoul256-light
+" colo seoul256-light
+" Gruvbox upgrade
+autocmd vimenter * ++nested colorscheme gruvbox
 " Auto reload changed files
 set autoread
 
@@ -267,21 +289,21 @@ set mouse=n
 " ***************************
 "
 " Define mappings
-autocmd FileType denite call s:denite_my_settings()
-function! s:denite_my_settings() abort
-    nnoremap <silent><buffer><expr> <CR>
-                \ denite#do_map('do_action')
-    nnoremap <silent><buffer><expr> d
-                \ denite#do_map('do_action', 'delete')
-    nnoremap <silent><buffer><expr> p
-                \ denite#do_map('do_action', 'preview')
-    nnoremap <silent><buffer><expr> q
-                \ denite#do_map('quit')
-    nnoremap <silent><buffer><expr> i
-                \ denite#do_map('open_filter_buffer')
-    nnoremap <silent><buffer><expr> <Space>
-                \ denite#do_map('toggle_select').'j'
-endfunction
+" autocmd FileType denite call s:denite_my_settings()
+" function! s:denite_my_settings() abort
+"     nnoremap <silent><buffer><expr> <CR>
+"                 \ denite#do_map('do_action')
+"     nnoremap <silent><buffer><expr> d
+"                 \ denite#do_map('do_action', 'delete')
+"     nnoremap <silent><buffer><expr> p
+"                 \ denite#do_map('do_action', 'preview')
+"     nnoremap <silent><buffer><expr> q
+"                 \ denite#do_map('quit')
+"     nnoremap <silent><buffer><expr> i
+"                 \ denite#do_map('open_filter_buffer')
+"     nnoremap <silent><buffer><expr> <Space>
+"                 \ denite#do_map('toggle_select').'j'
+" endfunction
 
 " ctrlp
 let g:ctrlp_custom_ignore = '__pycache__'
@@ -301,8 +323,14 @@ if executable('ag')
 endif
 
 " :CocInstall coc-prettier 
-command! -nargs=0 Prettier :CocCommand prettier.formatFile
-vmap <leader>p  <Plug>(coc-format-selected)
-nmap <leader>p  <Plug>(coc-format-selected)
+" command! -nargs=0 Prettier :CocCommand prettier.formatFile
+" vmap <leader>p  <Plug>(coc-format-selected)
+" nmap <leader>p  <Plug>(coc-format-selected)
 
-set statusline=%{FugitiveStatusline()}
+" Replaced with 'vim-airline/vim-airline'
+" set statusline=%{FugitiveStatusline()}
+"
+"
+" Seoul airline
+
+
