@@ -101,17 +101,20 @@ Plug 'tpope/vim-dispatch'
 
 "
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
-" nvim inside the browser !!! WTF? 🌫
-Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 Plug 'morhetz/gruvbox'
 
 " prettier
 Plug 'sbdchd/neoformat'
+" fun
+Plug 'ThePrimeagen/vim-apm'
+" nvim inside the browser !!! WTF? 🌫
+Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 call plug#end()
 " !!! ONLY when deoplete enabled
 " let g:deoplete#enable_at_startup = 1
  
 let g:gruvbox_contrast_dark = 'hard'
+set termguicolors
 if exists('+termguicolors')
 	let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 	let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
@@ -119,9 +122,16 @@ endif
 let g:gruvbox_invert_selection='0'
 
 set background=dark
+highlight ColorColumn ctermbg=0 guibg=grey
+highlight Normal guibg=none
+" highlight LineNr guifg=#ff8659
+" highlight LineNr guifg=#aed75f
+highlight LineNr guifg=#5eacd3
+highlight netrwDir guifg=#5eacd3
+highlight qfFileName guifg=#aed75f
 
 " Airline features
-" let g:airline#extensions#tabline#enabled = 1
+" le g:airline#extensions#tabline#enabled = 1
 
 let g:airline_powerline_fonts = 1
 
