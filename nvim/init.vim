@@ -13,6 +13,10 @@ let g:python3_host_prog = '/Users/tonkoshkurik/.pyenv/shims/python3'
 
 call plug#begin('~/.vim/bundle')
 " Service plugins first
+"Autocomplete
+Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+" Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
+" Plug 'neoclide/coc-denite'
 " neovim lua lsp for code autocomplete
 " Plug 'prabirshrestha/vim-lsp'
 " Plug 'neovim/nvim-lspconfig'
@@ -54,11 +58,26 @@ Plug 'scrooloose/nerdtree', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] }
 Plug 'tpope/vim-vinegar'
 Plug 'mileszs/ack.vim'
 
-"Autocomplete
-" Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
-" Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" Plug 'phpactor/php ,  {'do': 'composer install', 'for': 'php'}
+" Snippets
+" Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+if has('nvim')
+	" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+	" Plug 'ncm2/ncm2'
+	" enable ncm2 for all buffers
+	" Plug 'ncm2/ncm2-bufword'
+	" Plug 'ncm2/ncm2-path'
+else
+	" Plug 'ncm2/ncm2'
+	" Plug 'Shougo/deoplete.nvim'
+	Plug 'roxma/nvim-yarp'
+	Plug 'roxma/vim-hug-neovim-rpc'
+endif
+
+
+" Plug 'ncm2/ncm2-cssomni'
+" Plug 'ncm2/ncm2-tern'
+" Plug 'ncm2/ncm2-jedi'
+" Plug 'phpactor/phpactor' ,  {'do': 'composer install', 'for': 'php'}
 " Plug 'phpactor/ncm2-phpactor'
 Plug 'afternoon/vim-phpunit'
 Plug 'jwalton512/vim-blade'
@@ -68,11 +87,13 @@ Plug 'jwalton512/vim-blade'
 
 " Denite is a dark powered plugin for Neovim/Vim to unite all interfaces
 " Plug 'Shougo/denite.nvim'
+" Status line
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
-Plug 'pangloss/vim-javascript'
+" Plug 'pangloss/vim-javascript'
 Plug 'mattn/emmet-vim'
+" Plug 'afternoon/vim-phpunit'
 Plug 'tpope/vim-dispatch'
 
 "
@@ -89,11 +110,17 @@ Plug 'ThePrimeagen/vim-apm'
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 call plug#end()
 "
+" !!! ONLY when deoplete enabled
+" let g:deoplete#enable_at_startup = 1
+
+Plug 'phpactor/phpactor' ,  {'do': 'composer install', 'for': 'php'}
+" Plug 'kristijanhusak/deoplete-phpactor'
+
 " !!! ONLY WHEN USING COC.VIM !!!
-source ~/.dotfiles/nvim/coc.nvim
+source ~/.dotfiles/nvim/coc.nvim 
 
 " lsp
-source ~/.dotfiles/nvim/lsp.nvim
+" source ~/.dotfiles/nvim/lsp.nvim
 
 " ColorScheme tweaks
 set background=dark
@@ -145,7 +172,6 @@ set mouse=nv
 
 " Unified color scheme (default: dark)
 " colo seoul256
-
 " Light color scheme
 " colo seoul256-light
 " Gruvbox upgrade
@@ -339,3 +365,18 @@ nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 " let g:lsp_document_code_action_signs_hint = {'text': '🅰️ ' }
 " let g:lsp_diagnostics_signs_error = {'text': '❌'}
 " let g:lsp_diagnostics_signs_warning = {'text': '❗️'}
+"statusline 
+let g:airline#extensions#whitespace#mixed_indent_algo = 0
+" let g:airline#extensions#tabline#enabled = 1
+" let g:airline_powerline_fonts = 1
+" let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long', 'mixed-indent-file' ]
+let g:airline#extensions#whitespace#checks = []
+
+function! s:DiffWithSaved()
+  let filetype=&ft
+  diffthis
+  vnew | r # | normal! 1Gdd
+  diffthis
+  exe "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
+endfunction
+com! DiffSaved call s:DiffWithSaved()

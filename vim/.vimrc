@@ -79,6 +79,9 @@ Plug 'mileszs/ack.vim'
 Plug 'morhetz/gruvbox'
 " Plug 'altercation/vim-colors-solarized'
 " Plug 'junegunn/seoul256.vim'
+" Plug 'altercation/vim-colors-solarized'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 call plug#end()
 
 " --------------------------------------------------
@@ -108,7 +111,8 @@ set background=dark
 " colo solarized
 " set gruvbox as colorscheme
 autocmd vimenter * ++nested colorscheme gruvbox
-
+" colo seoul256
+" colo solarized
 
 " Light color scheme
 " colo seoul256-light
@@ -279,3 +283,4 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
 set rtp+=/usr/local/opt/fzf
 
 set cmdheight=1
+set rtp+=/usr/local/opt/fzf
