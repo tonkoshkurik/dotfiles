@@ -14,18 +14,17 @@ let g:python3_host_prog = '/Users/tonkoshkurik/.pyenv/shims/python3'
 call plug#begin('~/.vim/bundle')
 " Service plugins first
 " neovim lua lsp for code autocomplete
-Plug 'prabirshrestha/vim-lsp'
-Plug 'neovim/nvim-lspconfig'
-Plug 'mattn/vim-lsp-settings'
-Plug 'nvim-lua/completion-nvim'
+" Plug 'prabirshrestha/vim-lsp'
+" Plug 'neovim/nvim-lspconfig'
+" Plug 'mattn/vim-lsp-settings'
+" Plug 'nvim-lua/completion-nvim'
 " drivers
-Plug 'nvim-lua/completion-nvim'
 Plug 'tjdevries/nlua.nvim'
 ""
 " telescope requirements...
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
-Plug '/home/theprimeagen/personal/telescope.nvim'
+Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
 ""
 Plug 'tpope/vim-sensible'
@@ -50,7 +49,7 @@ Plug 'tpope/vim-surround'
 
 
 " File
-Plug 'ctrlpvim/ctrlp.vim'
+" Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdtree', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] }
 Plug 'tpope/vim-vinegar'
 Plug 'mileszs/ack.vim'
@@ -58,30 +57,7 @@ Plug 'mileszs/ack.vim'
 "Autocomplete
 " Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 " Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" Plug 'neoclide/coc-denite'
-" Plug 'phpactor/phpactor' ,  {'do': 'composer install', 'for': 'php'}
-" Plug 'kristijanhusak/deoplete-phpactor'
-"
-" Snippets
-" Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-" if has('nvim')
-" 	Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-" 	Plug 'ncm2/ncm2'
-" 	" enable ncm2 for all buffers
-" 	Plug 'ncm2/ncm2-bufword'
-" 	Plug 'ncm2/ncm2-path'
-" else
-" 	" Plug 'ncm2/ncm2'
-" 	" Plug 'Shougo/deoplete.nvim'
-" 	Plug 'roxma/nvim-yarp'
-" 	Plug 'roxma/vim-hug-neovim-rpc'
-" endif
-
-
-" Plug 'ncm2/ncm2-cssomni'
-" Plug 'ncm2/ncm2-tern'
-" Plug 'ncm2/ncm2-jedi'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Plug 'phpactor/php ,  {'do': 'composer install', 'for': 'php'}
 " Plug 'phpactor/ncm2-phpactor'
 Plug 'afternoon/vim-phpunit'
@@ -101,7 +77,9 @@ Plug 'tpope/vim-dispatch'
 
 "
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
+" ColorScheme
 Plug 'morhetz/gruvbox'
+" source ~/.dotfiles/nvim/seoul256.vim
 
 " prettier
 Plug 'sbdchd/neoformat'
@@ -110,18 +88,22 @@ Plug 'ThePrimeagen/vim-apm'
 " nvim inside the browser !!! WTF? 🌫
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 call plug#end()
-" !!! ONLY when deoplete enabled
-" let g:deoplete#enable_at_startup = 1
- 
+"
+" !!! ONLY WHEN USING COC.VIM !!!
+source ~/.dotfiles/nvim/coc.nvim
+
+" lsp
+source ~/.dotfiles/nvim/lsp.nvim
+
+" ColorScheme tweaks
+set background=dark
+let g:gruvbox_invert_selection='0'
 let g:gruvbox_contrast_dark = 'hard'
 set termguicolors
 if exists('+termguicolors')
 	let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 	let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 endif
-let g:gruvbox_invert_selection='0'
-
-set background=dark
 highlight ColorColumn ctermbg=0 guibg=grey
 highlight Normal guibg=none
 " highlight LineNr guifg=#ff8659
@@ -131,26 +113,12 @@ highlight netrwDir guifg=#5eacd3
 highlight qfFileName guifg=#aed75f
 
 " Airline features
-" le g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#enabled = 1
 
 let g:airline_powerline_fonts = 1
 
 
-" !!! ONLY WHEN USING COC.VIM !!!
-" source ~/.dotfiles/nvim/coc.nvim
-" source ~/.dotfiles/nvim/seoul256.vim
 let g:UltiSnipsExpandTrigger="<leader>+<tab>"
-" noremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
-" !!!! only set this shit when ncm2 enabled !!!!!!
-" autocmd BufEnter * call ncm2#enable_for_buffer()
-"
-" IMPORTANT: :help Ncm2PopupOpen for more information
-" set completeopt=noinsert,menuone,noselect
-
-" NOTE: you need to install completion sources to get completions. Check
-" our wiki page for a list of sources: https://github.com/ncm2/ncm2/wiki
-" !!!! only set this shit when ncm2 enabled !!!!!!
 
 " --------------------------------------------------
 "
@@ -172,6 +140,8 @@ set softtabstop=2   " Sets the number of columns for a TAB
 set expandtab       " Expand TABs to spaces
 
 
+" Enable mouse support for normal and visual modes
+set mouse=nv
 
 " Unified color scheme (default: dark)
 " colo seoul256
@@ -211,7 +181,7 @@ set completeopt-=preview
 set novisualbell
 
 " Setting up how to display whitespace characters
-" set listchars=tab:⇥\ ,trail:·,extends:⋯,precedes:⋯,nbsp:~
+set listchars=tab:⇥\ ,trail:·,extends:⋯,precedes:⋯,nbsp:~
 
 
 " --------------------------------------------------
@@ -314,29 +284,8 @@ nmap <silent> <leader>gca :Gcommit -a<cr>
 " git fixup previous commit
 nmap <silent> <leader>gcf :Gcommit -a --amend<cr>
 
-set mouse=n
 
 
-" ***************************
-" ********** Denite *********
-" ***************************
-"
-" Define mappings
-" autocmd FileType denite call s:denite_my_settings()
-" function! s:denite_my_settings() abort
-"     nnoremap <silent><buffer><expr> <CR>
-"                 \ denite#do_map('do_action')
-"     nnoremap <silent><buffer><expr> d
-"                 \ denite#do_map('do_action', 'delete')
-"     nnoremap <silent><buffer><expr> p
-"                 \ denite#do_map('do_action', 'preview')
-"     nnoremap <silent><buffer><expr> q
-"                 \ denite#do_map('quit')
-"     nnoremap <silent><buffer><expr> i
-"                 \ denite#do_map('open_filter_buffer')
-"     nnoremap <silent><buffer><expr> <Space>
-"                 \ denite#do_map('toggle_select').'j'
-" endfunction
 
 " ctrlp
 let g:ctrlp_custom_ignore = '__pycache__'
@@ -363,5 +312,30 @@ endif
 " Replaced with 'vim-airline/vim-airline'
 " set statusline=%{FugitiveStatusline()}
 "
+
+let t:is_transparent = 0
+function! Toggle_transparent()
+    if t:is_transparent == 0
+        hi Normal guibg=NONE ctermbg=NONE
+        let t:is_transparent = 1
+    else
+        set background=dark
+        let t:is_tranparent = 0
+    endif
+endfunction
+nnoremap <C-t> :call Toggle_transparent()<CR>
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+
+set rtp+=/usr/local/opt/fzf
+
+set cmdheight=1
+
+"Telescope mappings
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 "
-" Seoul airline
+" let g:lsp_document_code_action_signs_hint = {'text': '🅰️ ' }
+" let g:lsp_diagnostics_signs_error = {'text': '❌'}
+" let g:lsp_diagnostics_signs_warning = {'text': '❗️'}

@@ -41,7 +41,7 @@ Plug 'airblade/vim-gitgutter'
 " Plug 'phpactor/phpactor', {'for': 'php', 'branch': 'master', 'do': 'composer install --no-dev -o'}
 " Plug 'kristijanhusak/deoplete-phpactor'
 " Plug 'phpactor/ncm2-phpactor'
-Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+" Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc.nvim', {'branch': 'release'}	
 source ~/.vim/cocplugin.vim
 
@@ -63,7 +63,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 " Dark powered shell interface for NeoVim and Vim8.
-Plug 'Shougo/deol.nvim'
+" Plug 'Shougo/deol.nvim'
 Plug 'pangloss/vim-javascript'
 Plug 'mattn/emmet-vim'
 Plug 'afternoon/vim-phpunit'
@@ -85,8 +85,8 @@ call plug#end()
 "
 set macligatures
 set guifont=Fira\ Code:h14
-set termguicolors
 set printfont=Fira\ Code\ 12
+set termguicolors
 set linespace=3
 
 
@@ -104,8 +104,9 @@ set expandtab       " Expand TABs to spaces
 
 " Unified color scheme (default: dark)
 " colo seoul256
-set background=light
+set background=dark
 " colo solarized
+" set gruvbox as colorscheme
 autocmd vimenter * ++nested colorscheme gruvbox
 
 
@@ -262,7 +263,7 @@ let g:ctrlp_custom_ignore = {
 
 let g:ackprg = "ag --vimgrep"
 
-let t:is_transparent = 0
+let t:is_transparent = 1
 function! Toggle_transparent()
     if t:is_transparent == 0
         hi Normal guibg=NONE ctermbg=NONE
@@ -272,7 +273,7 @@ function! Toggle_transparent()
         let t:is_tranparent = 0
     endif
 endfunction
-nnoremap <C-t> : call Toggle_transparent()<CR>
+nnoremap <C-t> :call Toggle_transparent()<CR>
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
 set rtp+=/usr/local/opt/fzf
