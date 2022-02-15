@@ -121,6 +121,9 @@ set autoread
 " Indicates fast terminal connection
 set ttyfast
 
+" return back terminal way to ESCape
+tnoremap <Esc> <C-\><C-n>
+
 " Set character encoding to use in vim
 set encoding=utf-8
 
