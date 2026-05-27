@@ -1,0 +1,11 @@
+.DS_Store
+*.bak-*
+tags
+
+# nvim local files (lazy-lock.json stays tracked)
+nvim/spell/
+nvim/.luarc.json
+
+# secrets — only the .example is committed
+.zsh_secrets
+.zsh_secrets.local
